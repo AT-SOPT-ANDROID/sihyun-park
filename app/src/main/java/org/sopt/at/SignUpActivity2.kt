@@ -94,6 +94,7 @@ class SignUpActivity2 : ComponentActivity() {
                             .padding(top = 10.dp),
                         label = { Text("비밀번호", color = Color(0xFF505050)) },
                         singleLine = true,
+                        textStyle = TextStyle(color = Color.White),
                         visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
                         trailingIcon = {
                             val image = if (passwordVisible)
@@ -137,17 +138,17 @@ class SignUpActivity2 : ComponentActivity() {
                                 .show()
                         } else {
                             val intent = Intent().apply {
-                                putExtra("id", id)         // 👈 다시 id 넣기
-                                putExtra("pw", password)   // 👈 비번 넣기
+                                putExtra("id", id)
+                                putExtra("pw", password)
                             }
 
                             (context as Activity).setResult(Activity.RESULT_OK, intent)
-                            (context as Activity).finish()  // 👈 LoginActivity로 돌아가기
+                            (context as Activity).finish()
                         }
                     },
                     modifier = Modifier
                         .padding(10.dp)
-                        .padding(top = 450.dp, bottom = 80.dp)
+                        .padding(top = 450.dp, bottom = 100.dp)
                         .width(400.dp)
                         .border(1.dp, Color(0xFF9E9E9E), shape = RoundedCornerShape(5.dp)),
                     colors = ButtonDefaults.buttonColors(containerColor = Color.Black),

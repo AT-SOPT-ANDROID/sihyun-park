@@ -134,6 +134,7 @@ fun Login(
                     .padding(top = 10.dp),
                 label = { Text("아이디", color = Color(0xFF505050)) },
                 singleLine = true,
+                textStyle = TextStyle(color = Color.White),
                 colors = TextFieldDefaults.colors(
                     focusedContainerColor = Color(0xFF262626),
                     unfocusedContainerColor = Color(0xFF262626),
@@ -151,6 +152,7 @@ fun Login(
                     .padding(top = 10.dp),
                 label = { Text("비밀번호", color = Color(0xFF505050)) },
                 singleLine = true,
+                textStyle = TextStyle(color = Color.White),
                 visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
                 trailingIcon = {
                     val image = if (passwordVisible)
@@ -197,12 +199,13 @@ fun Login(
                 .padding(top = 16.dp),
             horizontalArrangement = Arrangement.Center
         ) {
-            Text("아이디찾기 ", color = Color(0xFFAFAFAF), fontSize = 17.sp)
-            Text(" | ", color = Color(0xFFAFAFAF), fontSize = 17.sp)
-            Text(" 비밀번호찾기 ", color = Color(0xFFAFAFAF), fontSize = 17.sp)
-            Text(" | ", color = Color(0xFFAFAFAF), fontSize = 17.sp, textDecoration = TextDecoration.Underline,
+            Text("아이디찾기 ", color = Color(0xFFAFAFAF), fontSize = 15.sp)
+            Text(" | ", color = Color(0xFFAFAFAF), fontSize = 15.sp)
+            Text(" 비밀번호찾기 ", color = Color(0xFFAFAFAF), fontSize = 15.sp)
+            Text(" | ", color = Color(0xFFAFAFAF), fontSize = 15.sp)
+            Text(" 회원가입 ", color = Color(0xFFAFAFAF), fontSize = 15.sp,
                 modifier = Modifier.clickable {
-                    onSignUpClick() // 수정된 부분! 여기서 registerForActivityResult가 실행됨
+                    onSignUpClick()
                 }
             )
         }
@@ -211,7 +214,7 @@ fun Login(
             text = "      이 사이트는 Gooogle reCAPTCHA로 보호되며,\nGoogle 개인정보 처리방침과 서비스 약관이 적용됩니다.",
             style = TextStyle(color = Color(0xFF505050)),
             modifier = Modifier
-                .padding(top = 20.dp, bottom = 270.dp)
+                .padding(top = 20.dp, bottom = 290.dp)
                 .padding(start = 10.dp)
         )
     }

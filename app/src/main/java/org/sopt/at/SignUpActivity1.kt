@@ -101,6 +101,7 @@ fun Signup1(modifier: Modifier = Modifier, onNextClick: (String) -> Unit) {
                     .padding(top=10.dp),
                 label = { Text("아이디",color = Color(0xFF505050))},
                 singleLine = true,
+                textStyle = TextStyle(color = Color.White),
                 colors = TextFieldDefaults.colors(
                     focusedContainerColor = Color(0xFF262626),
                     unfocusedContainerColor = Color(0xFF262626),
