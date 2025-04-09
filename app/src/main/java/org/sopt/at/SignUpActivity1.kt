@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -39,13 +40,32 @@ import org.sopt.at.ui.theme.ATSOPTANDROIDTheme
 class SignUpActivity1: ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+
+        val signUpLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == RESULT_OK) {
+                val id = result.data?.getStringExtra("id") ?: ""
+                val pw = result.data?.getStringExtra("pw") ?: ""
+
+                val intent = Intent().apply {
+                    putExtra("id", id)
+                    putExtra("pw", pw)
+                }
+                setResult(RESULT_OK, intent)
+                finish() // 로그인 화면으로 돌아감
+            }
+        }
+
         setContent {
             ATSOPTANDROIDTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
+                    Signup1(
+                        modifier = Modifier.padding(innerPadding),
+                        onNextClick = { id ->
+                            val intent = Intent(this, SignUpActivity2::class.java).apply {
+                                putExtra("id", id)
+                            }
+                            signUpLauncher.launch(intent)
+                        }
                     )
                 }
             }
@@ -54,15 +74,7 @@ class SignUpActivity1: ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Composable
-fun Signup1() {
+fun Signup1(modifier: Modifier = Modifier, onNextClick: (String) -> Unit) {
     var text by remember { mutableStateOf("") }
     var context = LocalContext.current
 
@@ -110,19 +122,15 @@ fun Signup1() {
 
         Button(
             onClick = {
-                if (text.length < 6 ) {
+                if (text.length < 6) {
                     Toast.makeText(context, "조건에 맞는 아이디를 입력해주세요.", Toast.LENGTH_SHORT).show()
-                }
-                else {
-                    val intent = Intent(context, SignUpActivity2::class.java).apply {
-                        flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-                    }
-                    context.startActivity(intent)
+                } else {
+                    onNextClick(text)
                 }
             },
             modifier = Modifier
                 .padding(10.dp)
-                .padding(top = 400.dp)
+                .padding(top = 450.dp, bottom = 80.dp)
                 .width(400.dp)
                 .border(1.dp, Color(0xFF9E9E9E), shape = RoundedCornerShape(5.dp)),
             colors = ButtonDefaults.buttonColors(containerColor = Color.Black),
@@ -138,6 +146,6 @@ fun Signup1() {
 @Composable
 fun GreetingPreview() {
     ATSOPTANDROIDTheme {
-        Signup1()
+
     }
 }

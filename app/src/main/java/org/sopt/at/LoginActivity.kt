@@ -6,9 +6,12 @@ import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -30,6 +33,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -42,21 +46,43 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.sopt.at.ui.theme.ATSOPTANDROIDTheme
+private lateinit var signUpLauncher: ActivityResultLauncher<Intent>
 
 class LoginActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+
+        val idState = mutableStateOf("")
+        val pwState = mutableStateOf("")
+
+        val signUpLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == RESULT_OK) {
+                val id = result.data?.getStringExtra("id") ?: ""
+                val pw = result.data?.getStringExtra("pw") ?: ""
+
+                idState.value = id
+                pwState.value = pw
+
+            }
+        }
+
         setContent {
             ATSOPTANDROIDTheme {
-                Scaffold( modifier = Modifier.fillMaxSize() ) { innerPadding ->
-                    Greeting2(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
+                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                    Login(
+                        modifier = Modifier.padding(innerPadding),
+                        idState = idState,
+                        pwState = pwState,
+                        onSignUpClick = {
+                            val intent = Intent(this, SignUpActivity1::class.java)
+                            signUpLauncher.launch(intent)
+                        }
                     )
                 }
             }
@@ -65,22 +91,19 @@ class LoginActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting2(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Composable
-fun Login() {
-    var text by remember { mutableStateOf("") }
-    var context = LocalContext.current
-    var password by remember { mutableStateOf("") }
+fun Login(
+    modifier: Modifier = Modifier,
+    idState: MutableState<String>,
+    pwState: MutableState<String>,
+    onSignUpClick: () -> Unit
+) {
+    val context = LocalContext.current
     var passwordVisible by remember { mutableStateOf(false) }
 
     Column(
-        modifier = Modifier.background(color= Color.Black),
+        modifier = Modifier
+            .background(color = Color.Black)
+            .then(modifier),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceBetween
     ) {
@@ -101,15 +124,15 @@ fun Login() {
                 .padding(top = 20.dp, start = 16.dp)
         )
 
-        Column() {
+        Column {
             OutlinedTextField(
-                value = text,
-                onValueChange = { text = it },
+                value = idState.value,
+                onValueChange = { idState.value = it },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(10.dp)
-                    .padding(top=10.dp),
-                label = { Text("아이디",color = Color(0xFF505050))},
+                    .padding(top = 10.dp),
+                label = { Text("아이디", color = Color(0xFF505050)) },
                 singleLine = true,
                 colors = TextFieldDefaults.colors(
                     focusedContainerColor = Color(0xFF262626),
@@ -120,13 +143,13 @@ fun Login() {
             )
 
             OutlinedTextField(
-                value = password,
-                onValueChange = { password = it },
+                value = pwState.value,
+                onValueChange = { pwState.value = it },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(10.dp)
-                    .padding(top=10.dp),
-                label = { Text("비밀번호",color = Color(0xFF505050))},
+                    .padding(top = 10.dp),
+                label = { Text("비밀번호", color = Color(0xFF505050)) },
                 singleLine = true,
                 visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
                 trailingIcon = {
@@ -152,7 +175,7 @@ fun Login() {
 
         Button(
             onClick = {
-                if (password.length < 8) {
+                if (pwState.value.length < 8) {
                     Toast.makeText(context, "조건에 맞는 비밀번호를 입력해주세요.", Toast.LENGTH_SHORT).show()
                 }
             },
@@ -177,26 +200,27 @@ fun Login() {
             Text("아이디찾기 ", color = Color(0xFFAFAFAF), fontSize = 17.sp)
             Text(" | ", color = Color(0xFFAFAFAF), fontSize = 17.sp)
             Text(" 비밀번호찾기 ", color = Color(0xFFAFAFAF), fontSize = 17.sp)
-            Text(" | ", color = Color(0xFFAFAFAF), fontSize = 17.sp)
-            Text(" 회원가입 ", color = Color(0xFFAFAFAF), fontSize = 17.sp)
+            Text(" | ", color = Color(0xFFAFAFAF), fontSize = 17.sp, textDecoration = TextDecoration.Underline,
+                modifier = Modifier.clickable {
+                    onSignUpClick() // 수정된 부분! 여기서 registerForActivityResult가 실행됨
+                }
+            )
         }
-
 
         Text(
             text = "      이 사이트는 Gooogle reCAPTCHA로 보호되며,\nGoogle 개인정보 처리방침과 서비스 약관이 적용됩니다.",
             style = TextStyle(color = Color(0xFF505050)),
             modifier = Modifier
-                .padding(top = 20.dp)
-                .padding(start=10.dp)
-
+                .padding(top = 20.dp, bottom = 270.dp)
+                .padding(start = 10.dp)
         )
     }
 }
+
 
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview2() {
     ATSOPTANDROIDTheme {
-        Login()
     }
 }
