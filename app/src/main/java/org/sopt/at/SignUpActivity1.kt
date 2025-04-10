@@ -1,5 +1,6 @@
 package org.sopt.at
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
@@ -38,6 +39,7 @@ import androidx.compose.ui.unit.sp
 import org.sopt.at.ui.theme.ATSOPTANDROIDTheme
 
 class SignUpActivity1: ComponentActivity() {
+    @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -51,15 +53,14 @@ class SignUpActivity1: ComponentActivity() {
                     putExtra("pw", pw)
                 }
                 setResult(RESULT_OK, intent)
-                finish() // 로그인 화면으로 돌아감
+                finish()
             }
         }
 
         setContent {
             ATSOPTANDROIDTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                Scaffold(modifier = Modifier.fillMaxSize()) {
                     Signup1(
-                        modifier = Modifier.padding(innerPadding),
                         onNextClick = { id ->
                             val intent = Intent(this, SignUpActivity2::class.java).apply {
                                 putExtra("id", id)
