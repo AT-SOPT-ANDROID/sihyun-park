@@ -78,7 +78,7 @@ fun Home(modifier: Modifier = Modifier) {
             Image(
                 painter = painterResource(id = R.drawable.tving_text_logo),
                 contentDescription = "TVING Logo",
-                modifier = Modifier.height(24.dp)
+                modifier = Modifier.height(35.dp)
             )
 
             Row(
@@ -88,7 +88,7 @@ fun Home(modifier: Modifier = Modifier) {
                     painter = painterResource(id = R.drawable.icon_connect),
                     contentDescription = "Connect Icon",
                     modifier = Modifier
-                        .size(24.dp)
+                        .size(35.dp)
                         .padding(end = 15.dp),
                     colorFilter = ColorFilter.tint(Color.White)
                 )
