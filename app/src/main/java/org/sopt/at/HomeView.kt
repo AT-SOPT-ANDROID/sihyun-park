@@ -134,7 +134,7 @@ fun Home(modifier: Modifier = Modifier) {
                     painter = painterResource(id = imageRes),
                     contentDescription = "Poster",
                     modifier = Modifier
-                        .size(width = 350.dp, height = 400.dp)
+                        .size(width = 400.dp, height = 500.dp)
                         .clip(RoundedCornerShape(30.dp))
                 )
             }
