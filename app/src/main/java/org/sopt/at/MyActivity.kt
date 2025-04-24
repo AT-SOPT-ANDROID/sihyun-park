@@ -75,7 +75,7 @@ fun Greeting4(name: String, modifier: Modifier = Modifier) {
             },
             modifier = Modifier
                 .padding(10.dp)
-                .padding(top = 400.dp, bottom = 285.dp)
+                .padding(top = 400.dp, bottom = 300.dp)
                 .width(400.dp)
                 .height(45.dp),
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF404040)),
