@@ -174,6 +174,6 @@ fun NavigationHost(
         composable("shorts") { Shorts() }
         composable("live") { Live() }
         composable("search") { Search() }
-        composable("history") { History() }
+        composable("history") { HistoryScreen() }
     }
 }

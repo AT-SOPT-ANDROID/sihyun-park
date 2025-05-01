@@ -89,7 +89,7 @@ fun Home(
             }
         }
 
-        val categories = listOf("DRAMA", "VARIETY", "MOVIE", "SPORTS", "ANIMATION")
+        val Homecategories = listOf("DRAMA", "VARIETY", "MOVIE", "SPORTS", "ANIMATION")
 
         LazyRow(
             horizontalArrangement = Arrangement.spacedBy(12.dp),
@@ -97,7 +97,7 @@ fun Home(
                 .fillMaxWidth()
                 .padding(vertical = 8.dp)
         ) {
-            items(categories) { category ->
+            items(Homecategories) { category ->
                 Text(
                     text = category,
                     color = Color.White,
