@@ -9,6 +9,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -61,6 +62,8 @@ private lateinit var signUpLauncher: ActivityResultLauncher<Intent>
 
 class LoginActivity : ComponentActivity() {
 
+    private val myViewModel: MyViewModel by viewModels()
+
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -95,7 +98,8 @@ class LoginActivity : ComponentActivity() {
                             signUpLauncher.launch(intent)
                         },
                         registeredId = registeredId.value,
-                        registeredPw = registeredPw.value
+                        registeredPw = registeredPw.value,
+                        myViewModel = myViewModel
                     )
                 }
             }
@@ -111,7 +115,8 @@ fun Login(
     pwState: MutableState<String>,
     onSignUpClick: () -> Unit,
     registeredId: String,
-    registeredPw: String
+    registeredPw: String,
+    myViewModel: MyViewModel
 ) {
     val context = LocalContext.current
     var passwordVisible by remember { mutableStateOf(false) }
@@ -214,7 +219,8 @@ fun Login(
                             }
                         }
                         else -> {
-                            val intent = Intent(context, MyActivity::class.java).apply {
+                            myViewModel.setUserId(idState.value)
+                            val intent = Intent(context, MainActivity::class.java).apply {
                                 putExtra("id", idState.value)
                             }
                             context.startActivity(intent)
