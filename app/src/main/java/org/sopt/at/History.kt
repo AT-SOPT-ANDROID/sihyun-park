@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.sp
 import org.sopt.at.ui.theme.ATSOPTANDROIDTheme
 
 @Composable
-fun History(modifier: Modifier = Modifier){
+fun HistoryScreen(modifier: Modifier = Modifier){
     Text(
         text = "History",
         color = Color.Black,
@@ -30,6 +30,6 @@ fun History(modifier: Modifier = Modifier){
 
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreview9() {
-    History()
+private fun HistoryScreenPreview() {
+    HistoryScreen()
 }

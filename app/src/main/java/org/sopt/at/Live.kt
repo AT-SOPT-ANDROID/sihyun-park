@@ -18,18 +18,19 @@ import androidx.compose.ui.unit.sp
 import org.sopt.at.ui.theme.ATSOPTANDROIDTheme
 
 @Composable
-fun Live(modifier: Modifier = Modifier){
+fun Live(modifier: Modifier = Modifier) {
     Text(
         text = "Live",
         color = Color.Black,
         fontSize = 18.sp,
         fontWeight = FontWeight.Bold,
-        modifier = Modifier.padding(start = 4.dp, bottom = 8.dp, top = 24.dp)
+        modifier = modifier
+            .padding(start = 4.dp, bottom = 8.dp, top = 24.dp)
     )
 }
 
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreview7() {
+fun LivePreView() {
     Live()
 }

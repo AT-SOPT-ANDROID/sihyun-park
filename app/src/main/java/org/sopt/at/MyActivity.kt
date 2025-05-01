@@ -14,12 +14,15 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.compose.LocalLifecycleOwner
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 
 @Composable
 fun MyScreen(navController: NavController, viewModel: MyViewModel) {
-    val id by viewModel.userId.collectAsState()
+    val lifecycleOwner = LocalLifecycleOwner.current
+    val id by viewModel.userId.collectAsStateWithLifecycle(lifecycleOwner)
 
     Column(
         modifier = Modifier

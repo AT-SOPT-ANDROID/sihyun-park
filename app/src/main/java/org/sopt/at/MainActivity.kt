@@ -166,7 +166,7 @@ fun NavigationHost(
 ) {
     NavHost(navController = navController, startDestination = "home", modifier = modifier) {
         composable("home") {
-            Home(navController = navController, viewModel = myViewModel) // ✅
+            Home(navController = navController, viewModel = myViewModel)
         }
         composable("my") {
             MyScreen(navController = navController, viewModel = myViewModel)

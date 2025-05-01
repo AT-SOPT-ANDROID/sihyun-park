@@ -106,7 +106,7 @@ fun Home(
             }
         }
 
-        val posterList = listOf(
+        val BannerImageList = listOf(
             R.drawable.drama1_poster_image,
             R.drawable.drama2_poster_image,
             R.drawable.drama3_poster_image,
@@ -118,7 +118,7 @@ fun Home(
                 .fillMaxWidth()
                 .padding(top = 8.dp)
         ) {
-            items(posterList) { imageRes ->
+            items(BannerImageList) { imageRes ->
                 Image(
                     painter = painterResource(id = imageRes),
                     contentDescription = "Poster",
@@ -219,5 +219,5 @@ fun Home(
 
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreview5() {
+fun HomeViewPreview() {
 }
