@@ -248,12 +248,12 @@ fun Login(
                     .padding(top = 16.dp),
                 horizontalArrangement = Arrangement.Center
             ) {
-                Text("아이디찾기 ", color = Color(0xFFAFAFAF), fontSize = 15.sp)
-                Text(" | ", color = Color(0xFFAFAFAF), fontSize = 15.sp)
-                Text(" 비밀번호찾기 ", color = Color(0xFFAFAFAF), fontSize = 15.sp)
-                Text(" | ", color = Color(0xFFAFAFAF), fontSize = 15.sp)
+                Text("아이디찾기 ", color = AppColors.gray5, fontSize = 15.sp)
+                Text(" | ", color = AppColors.gray5, fontSize = 15.sp)
+                Text(" 비밀번호찾기 ", color = AppColors.gray5, fontSize = 15.sp)
+                Text(" | ", color = AppColors.gray5, fontSize = 15.sp)
                 Text(
-                    " 회원가입 ", color = Color(0xFFAFAFAF), fontSize = 15.sp,
+                    " 회원가입 ", color = AppColors.gray5, fontSize = 15.sp,
                     modifier = Modifier.clickable {
                         onSignUpClick()
                     }
