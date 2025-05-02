@@ -70,10 +70,10 @@ fun BottomNavBar(navController: NavController) {
             selected = false,
             onClick = { navController.navigate("home") },
             colors = NavigationBarItemDefaults.colors(
-                selectedIconColor = Color.White,
-                selectedTextColor = Color.White,
-                unselectedIconColor = Color(0xFF808080),
-                unselectedTextColor = Color(0xFF808080)
+                selectedIconColor = AppColors.white,
+                selectedTextColor = AppColors.white,
+                unselectedIconColor = AppColors.gray4,
+                unselectedTextColor = AppColors.gray4
             )
         )
         NavigationBarItem(
@@ -90,10 +90,10 @@ fun BottomNavBar(navController: NavController) {
             selected = false,
             onClick = { navController.navigate("shorts") },
             colors = NavigationBarItemDefaults.colors(
-                selectedIconColor = Color.White,
-                selectedTextColor = Color.White,
-                unselectedIconColor = Color(0xFF808080),
-                unselectedTextColor = Color(0xFF808080)
+                selectedIconColor = AppColors.white,
+                selectedTextColor = AppColors.white,
+                unselectedIconColor = AppColors.gray4,
+                unselectedTextColor = AppColors.gray4
             )
         )
         NavigationBarItem(
@@ -110,10 +110,10 @@ fun BottomNavBar(navController: NavController) {
             selected = false,
             onClick = { navController.navigate("live") },
             colors = NavigationBarItemDefaults.colors(
-                selectedIconColor = Color.White,
-                selectedTextColor = Color.White,
-                unselectedIconColor = Color(0xFF808080),
-                unselectedTextColor = Color(0xFF808080)
+                selectedIconColor = AppColors.white,
+                selectedTextColor = AppColors.white,
+                unselectedIconColor = AppColors.gray4,
+                unselectedTextColor = AppColors.gray4
             )
         )
         NavigationBarItem(
@@ -130,10 +130,10 @@ fun BottomNavBar(navController: NavController) {
             selected = false,
             onClick = { navController.navigate("search") },
             colors = NavigationBarItemDefaults.colors(
-                selectedIconColor = Color.White,
-                selectedTextColor = Color.White,
-                unselectedIconColor = Color(0xFF808080),
-                unselectedTextColor = Color(0xFF808080)
+                selectedIconColor = AppColors.white,
+                selectedTextColor = AppColors.white,
+                unselectedIconColor = AppColors.gray4,
+                unselectedTextColor = AppColors.gray4
             )
         )
         NavigationBarItem(
@@ -150,10 +150,10 @@ fun BottomNavBar(navController: NavController) {
             selected = false,
             onClick = { navController.navigate("history") },
             colors = NavigationBarItemDefaults.colors(
-                selectedIconColor = Color.White,
-                selectedTextColor = Color.White,
-                unselectedIconColor = Color(0xFF808080),
-                unselectedTextColor = Color(0xFF808080)
+                selectedIconColor = AppColors.white,
+                selectedTextColor = AppColors.white,
+                unselectedIconColor = AppColors.gray4,
+                unselectedTextColor = AppColors.gray4
             )
         )
     }
