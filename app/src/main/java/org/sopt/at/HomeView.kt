@@ -34,6 +34,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.text.font.FontStyle
 import androidx.navigation.NavController
@@ -89,7 +90,7 @@ fun Home(
             }
         }
 
-        val Homecategories = listOf("DRAMA", "VARIETY", "MOVIE", "SPORTS", "ANIMATION")
+        val homeCategories = remember { listOf("DRAMA", "VARIETY", "MOVIE", "SPORTS", "ANIMATION") }
 
         LazyRow(
             horizontalArrangement = Arrangement.spacedBy(12.dp),
@@ -97,7 +98,7 @@ fun Home(
                 .fillMaxWidth()
                 .padding(vertical = 8.dp)
         ) {
-            items(Homecategories) { category ->
+            items(homeCategories) { category ->
                 Text(
                     text = category,
                     color = Color.White,
