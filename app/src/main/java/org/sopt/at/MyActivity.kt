@@ -22,7 +22,7 @@ import androidx.navigation.NavController
 @Composable
 fun MyScreen(navController: NavController, viewModel: MyViewModel) {
     val lifecycleOwner = LocalLifecycleOwner.current
-    val id by viewModel.userId.collectAsStateWithLifecycle(lifecycleOwner)
+    val id by viewModel.userId.collectAsStateWithLifecycle()
 
     Column(
         modifier = Modifier
