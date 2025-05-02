@@ -77,7 +77,7 @@ fun Home(
                     modifier = Modifier
                         .size(35.dp)
                         .padding(end = 15.dp),
-                    colorFilter = ColorFilter.tint(Color.White)
+                    colorFilter = ColorFilter.tint(AppColors.white)
                 )
                 Image(
                     painter = painterResource(id = R.drawable.my_icon),
@@ -102,7 +102,7 @@ fun Home(
             items(homeCategories) { category ->
                 Text(
                     text = category,
-                    color = Color.White,
+                    color =AppColors.white,
                     fontSize = 16.sp,
                 )
             }
@@ -144,7 +144,7 @@ fun Home(
 
         Text(
             text = "오늘의 티빙 top 20",
-            color = Color.White,
+            color = AppColors.white,
             fontSize = 18.sp,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(start = 4.dp, bottom = 8.dp, top = 24.dp)
@@ -163,7 +163,7 @@ fun Home(
                 ) {
                     Text(
                         text = "${index + 1}",
-                        color = Color.White,
+                        color = AppColors.white,
                         fontSize = 90.sp,
                         fontWeight = FontWeight.Bold,
                         fontStyle = FontStyle.Italic,
@@ -193,7 +193,7 @@ fun Home(
 
         Text(
             text = "지금 방영 중인 콘텐츠",
-            color = Color.White,
+            color = AppColors.white,
             fontSize = 18.sp,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(start = 4.dp, bottom = 8.dp, top = 24.dp)

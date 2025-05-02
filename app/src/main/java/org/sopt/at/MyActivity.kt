@@ -35,7 +35,7 @@ fun MyScreen(navController: NavController, viewModel: MyViewModel) {
     ) {
         Text(
             text = "ID: $id",
-            style = TextStyle(fontSize = 20.sp, color = Color.White)
+            style = TextStyle(fontSize = 20.sp, color =  AppColors.white)
         )
 
         Button(
@@ -49,11 +49,11 @@ fun MyScreen(navController: NavController, viewModel: MyViewModel) {
                 .padding(top = 400.dp, bottom = 300.dp)
                 .width(400.dp)
                 .height(45.dp),
-            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF404040)),
+            colors = ButtonDefaults.buttonColors(containerColor =  AppColors.primary),
             shape = RoundedCornerShape(5.dp),
-            border = BorderStroke(1.dp, Color(0xFF404040))
+            border = BorderStroke(1.dp,  AppColors.primary)
         ) {
-            Text("로그아웃", color = Color(0xFF7F7F7F), fontWeight = FontWeight.Bold)
+            Text("로그아웃", color =  AppColors.gray1, fontWeight = FontWeight.Bold)
         }
     }
 }
