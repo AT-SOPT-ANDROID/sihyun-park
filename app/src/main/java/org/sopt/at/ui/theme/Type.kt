@@ -15,5 +15,24 @@ val AppTypography = Typography(
     labelSmall = TextStyle(
         fontSize = 10.sp,
         color = AppColors.gray1
+    ),
+    labelMedium = TextStyle(
+        fontSize = 15.sp,
+        color = AppColors.gray1
+    ),
+    titleMedium = TextStyle(
+        fontSize = 18.sp,
+        fontWeight = FontWeight.Bold,
+        color = AppColors.white
+    ),
+    titleLarge = TextStyle(
+        fontSize = 20.sp,
+        fontWeight = FontWeight.Bold,
+        color = AppColors.white
+    ),
+    displaySmall = TextStyle(
+        fontSize = 15.sp,
+        fontWeight = FontWeight.Bold,
+        color = AppColors.gray2
     )
 )
