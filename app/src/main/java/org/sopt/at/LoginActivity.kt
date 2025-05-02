@@ -58,6 +58,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.launch
 import org.sopt.at.ui.theme.ATSOPTANDROIDTheme
+import org.sopt.at.ui.theme.AppColors
 
 private lateinit var signUpLauncher: ActivityResultLauncher<Intent>
 
@@ -131,7 +132,7 @@ fun Login(
     ) {
         Column(
             modifier = Modifier
-                .background(color = Color.Black)
+                .background(AppColors.background,)
                 .then(modifier),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.SpaceBetween

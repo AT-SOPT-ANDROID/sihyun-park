@@ -45,6 +45,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.sopt.at.ui.theme.ATSOPTANDROIDTheme
+import org.sopt.at.ui.theme.AppColors
 
 class SignUpActivity2 : ComponentActivity() {
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -56,7 +57,7 @@ class SignUpActivity2 : ComponentActivity() {
 
         setContent {
             ATSOPTANDROIDTheme {
-                Scaffold(modifier = Modifier.fillMaxSize().background(color = Color.Black)) {
+                Scaffold(modifier = Modifier.fillMaxSize().background(color = AppColors.background,)) {
                     Signup2(id = id)
                 }
             }
@@ -72,7 +73,7 @@ fun Signup2(id: String) {
     var passwordVisible by remember { mutableStateOf(false) }
 
     Column(
-        modifier = Modifier.background(color = Color.Black),
+        modifier = Modifier.background(color = AppColors.background,),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceBetween
     ) {
@@ -153,7 +154,7 @@ fun Signup2(id: String) {
                 .padding(top = 450.dp, bottom = 80.dp)
                 .width(400.dp)
                 .border(1.dp, Color(0xFF9E9E9E), shape = RoundedCornerShape(5.dp)),
-            colors = ButtonDefaults.buttonColors(containerColor = Color.Black),
+            colors = ButtonDefaults.buttonColors(containerColor = AppColors.background,),
             shape = RoundedCornerShape(5.dp)
         ) {
             Text("다음", color = Color(0xFF505050))

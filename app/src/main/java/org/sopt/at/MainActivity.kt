@@ -21,6 +21,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import org.sopt.at.ui.theme.ATSOPTANDROIDTheme
 import androidx.navigation.compose.composable
+import org.sopt.at.ui.theme.AppColors
 
 
 class MainActivity : ComponentActivity() {
@@ -52,7 +53,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun BottomNavBar(navController: NavController) {
     NavigationBar(
-        containerColor = Color.Black,
+        containerColor = AppColors.background,
         tonalElevation = 0.dp
     ) {
         NavigationBarItem(

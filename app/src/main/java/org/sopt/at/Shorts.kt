@@ -16,12 +16,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.sopt.at.ui.theme.ATSOPTANDROIDTheme
+import org.sopt.at.ui.theme.AppColors
 
 @Composable
 fun Shorts(modifier: Modifier = Modifier){
     Text(
         text = "Shorts",
-        color = Color.Black,
+        color = AppColors.background,
         fontSize = 18.sp,
         fontWeight = FontWeight.Bold,
         modifier = Modifier.padding(start = 4.dp, bottom = 8.dp, top = 24.dp)

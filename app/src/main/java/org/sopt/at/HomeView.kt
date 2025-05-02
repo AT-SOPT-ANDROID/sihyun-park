@@ -38,6 +38,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.text.font.FontStyle
 import androidx.navigation.NavController
+import org.sopt.at.ui.theme.AppColors
 
 @Composable
 fun Home(
@@ -50,7 +51,7 @@ fun Home(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.Black)
+            .background(AppColors.background,)
             .padding(16.dp)
             .verticalScroll(scrollState)
     ) {
