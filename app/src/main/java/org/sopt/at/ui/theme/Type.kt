@@ -14,6 +14,6 @@ val AppTypography = Typography(
     ),
     labelSmall = TextStyle(
         fontSize = 10.sp,
-        color = AppColors.gray
+        color = AppColors.gray1
     )
 )
