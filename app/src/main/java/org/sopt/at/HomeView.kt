@@ -34,6 +34,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.text.font.FontStyle
@@ -144,9 +145,7 @@ fun Home(
 
         Text(
             text = "오늘의 티빙 top 20",
-            color = AppColors.white,
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Bold,
+            style = MaterialTheme.typography.titleMedium,
             modifier = Modifier.padding(start = 4.dp, bottom = 8.dp, top = 24.dp)
         )
 
@@ -193,9 +192,7 @@ fun Home(
 
         Text(
             text = "지금 방영 중인 콘텐츠",
-            color = AppColors.white,
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Bold,
+            style = MaterialTheme.typography.titleMedium,
             modifier = Modifier.padding(start = 4.dp, bottom = 8.dp, top = 24.dp)
         )
 

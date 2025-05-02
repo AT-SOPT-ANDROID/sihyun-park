@@ -30,6 +30,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
@@ -148,11 +149,7 @@ fun Login(
 
             Text(
                 text = "TVING ID 로그인",
-                style = TextStyle(
-                    fontSize = 20.sp,
-                    color = AppColors.white,
-                    fontWeight = FontWeight.Bold
-                ),
+                style = MaterialTheme.typography.titleLarge,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(top = 20.dp, start = 16.dp)
@@ -239,7 +236,7 @@ fun Login(
                 shape = RoundedCornerShape(5.dp),
                 border = BorderStroke(1.dp, AppColors.primary)
             ) {
-                Text("로그인하기", color = Color(0xFF7F7F7F), fontWeight = FontWeight.Bold)
+                Text("로그인하기", color = AppColors.gray5, fontWeight = FontWeight.Bold)
             }
 
             Row(

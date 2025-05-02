@@ -80,7 +80,7 @@ fun Signup2(id: String) {
 
         Text(
             text = "비밀번호를 입력해주세요",
-            style = TextStyle(fontSize = 20.sp, color = Color(0xFFD8D8D8)),
+            style = TextStyle(fontSize = 20.sp, color = AppColors.gray5),
             modifier = Modifier
                 .padding(top = 70.dp)
         )
