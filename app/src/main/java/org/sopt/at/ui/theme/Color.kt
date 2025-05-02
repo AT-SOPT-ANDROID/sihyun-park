@@ -10,4 +10,6 @@ object AppColors {
     val gray1 = Color(0xFFAFAFAF)
     val gray2 = Color(0xFF9E9E9E)
     val gray3 = Color(0xFF262626)
+    val gray4=Color(0xFF808080)
+    val gray5=Color(0xFFAFAFAF )
 }
