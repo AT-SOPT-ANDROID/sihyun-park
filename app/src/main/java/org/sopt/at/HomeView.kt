@@ -34,9 +34,12 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.text.font.FontStyle
 import androidx.navigation.NavController
+import org.sopt.at.ui.theme.AppColors
 
 @Composable
 fun Home(
@@ -49,7 +52,7 @@ fun Home(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.Black)
+            .background(AppColors.background,)
             .padding(16.dp)
             .verticalScroll(scrollState)
     ) {
@@ -75,7 +78,7 @@ fun Home(
                     modifier = Modifier
                         .size(35.dp)
                         .padding(end = 15.dp),
-                    colorFilter = ColorFilter.tint(Color.White)
+                    colorFilter = ColorFilter.tint(AppColors.white)
                 )
                 Image(
                     painter = painterResource(id = R.drawable.my_icon),
@@ -89,7 +92,7 @@ fun Home(
             }
         }
 
-        val Homecategories = listOf("DRAMA", "VARIETY", "MOVIE", "SPORTS", "ANIMATION")
+        val homeCategories = remember { listOf("DRAMA", "VARIETY", "MOVIE", "SPORTS", "ANIMATION") }
 
         LazyRow(
             horizontalArrangement = Arrangement.spacedBy(12.dp),
@@ -97,10 +100,10 @@ fun Home(
                 .fillMaxWidth()
                 .padding(vertical = 8.dp)
         ) {
-            items(Homecategories) { category ->
+            items(homeCategories) { category ->
                 Text(
                     text = category,
-                    color = Color.White,
+                    color =AppColors.white,
                     fontSize = 16.sp,
                 )
             }
@@ -142,9 +145,7 @@ fun Home(
 
         Text(
             text = "오늘의 티빙 top 20",
-            color = Color.White,
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Bold,
+            style = MaterialTheme.typography.titleMedium,
             modifier = Modifier.padding(start = 4.dp, bottom = 8.dp, top = 24.dp)
         )
 
@@ -161,7 +162,7 @@ fun Home(
                 ) {
                     Text(
                         text = "${index + 1}",
-                        color = Color.White,
+                        color = AppColors.white,
                         fontSize = 90.sp,
                         fontWeight = FontWeight.Bold,
                         fontStyle = FontStyle.Italic,
@@ -191,9 +192,7 @@ fun Home(
 
         Text(
             text = "지금 방영 중인 콘텐츠",
-            color = Color.White,
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Bold,
+            style = MaterialTheme.typography.titleMedium,
             modifier = Modifier.padding(start = 4.dp, bottom = 8.dp, top = 24.dp)
         )
 

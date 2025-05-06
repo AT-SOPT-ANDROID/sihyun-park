@@ -45,6 +45,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.sopt.at.ui.theme.ATSOPTANDROIDTheme
+import org.sopt.at.ui.theme.AppColors
 
 class SignUpActivity2 : ComponentActivity() {
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -56,7 +57,7 @@ class SignUpActivity2 : ComponentActivity() {
 
         setContent {
             ATSOPTANDROIDTheme {
-                Scaffold(modifier = Modifier.fillMaxSize().background(color = Color.Black)) {
+                Scaffold(modifier = Modifier.fillMaxSize().background(color = AppColors.background,)) {
                     Signup2(id = id)
                 }
             }
@@ -72,14 +73,14 @@ fun Signup2(id: String) {
     var passwordVisible by remember { mutableStateOf(false) }
 
     Column(
-        modifier = Modifier.background(color = Color.Black),
+        modifier = Modifier.background(color = AppColors.background,),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceBetween
     ) {
 
         Text(
             text = "비밀번호를 입력해주세요",
-            style = TextStyle(fontSize = 20.sp, color = Color(0xFFD8D8D8)),
+            style = TextStyle(fontSize = 20.sp, color = AppColors.gray5),
             modifier = Modifier
                 .padding(top = 70.dp)
         )
@@ -92,7 +93,7 @@ fun Signup2(id: String) {
                     .fillMaxWidth()
                     .padding(10.dp)
                     .padding(top = 10.dp),
-                label = { Text("비밀번호", color = Color(0xFF505050)) },
+                label = { Text("비밀번호", color = AppColors.secondary) },
                 singleLine = true,
                 textStyle = TextStyle(color = Color.White),
                 visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
@@ -108,21 +109,21 @@ fun Signup2(id: String) {
                         Icon(
                             imageVector = image,
                             contentDescription = "비밀번호 보기/숨기기",
-                            tint = Color(0xFF505050)
+                            tint = AppColors.secondary
                         )
                     }
                 },
                 colors = TextFieldDefaults.colors(
-                    focusedContainerColor = Color(0xFF262626),
-                    unfocusedContainerColor = Color(0xFF262626),
-                    focusedIndicatorColor = Color(0xFF9E9E9E),
-                    unfocusedIndicatorColor = Color(0xFF9E9E9E),
+                    focusedContainerColor = AppColors.gray3,
+                    unfocusedContainerColor = AppColors.gray3,
+                    focusedIndicatorColor = AppColors.gray2,
+                    unfocusedIndicatorColor = AppColors.gray2,
                 )
             )
 
             Text(
                 text = "영문,숫자,특수문자(~!@#$%^&*) 조합 8~15자리",
-                style = TextStyle(color = Color(0xFF505050)),
+                style = TextStyle(color = AppColors.secondary),
                 modifier = Modifier
                     .padding(top = 4.dp)
                     .padding(start = 10.dp)
@@ -152,11 +153,11 @@ fun Signup2(id: String) {
                 .padding(10.dp)
                 .padding(top = 450.dp, bottom = 80.dp)
                 .width(400.dp)
-                .border(1.dp, Color(0xFF9E9E9E), shape = RoundedCornerShape(5.dp)),
-            colors = ButtonDefaults.buttonColors(containerColor = Color.Black),
+                .border(1.dp, AppColors.gray2, shape = RoundedCornerShape(5.dp)),
+            colors = ButtonDefaults.buttonColors(containerColor = AppColors.background,),
             shape = RoundedCornerShape(5.dp)
         ) {
-            Text("다음", color = Color(0xFF505050))
+            Text("다음", color = AppColors.secondary)
         }
     }
 }

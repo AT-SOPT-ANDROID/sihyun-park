@@ -20,15 +20,13 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import org.sopt.at.ui.theme.ATSOPTANDROIDTheme
-import androidx.navigation.compose.composable
-
+import org.sopt.at.ui.theme.AppColors
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         val myViewModel: MyViewModel by viewModels()
-
         val idFromLogin = intent.getStringExtra("id") ?: "Unknown"
         myViewModel.setUserId(idFromLogin)
 
@@ -36,7 +34,12 @@ class MainActivity : ComponentActivity() {
             ATSOPTANDROIDTheme {
                 val navController = rememberNavController()
                 Scaffold(
-                    bottomBar = { BottomNavBar(navController = navController) }
+                    bottomBar = {
+                        BottomNavBar(
+                            navController = navController,
+                            currentRoute = navController.currentBackStackEntry?.destination?.route
+                        )
+                    }
                 ) { innerPadding ->
                     NavigationHost(
                         modifier = Modifier.padding(innerPadding),
@@ -49,112 +52,43 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+enum class MainTab(val route: String, val icon: Int, val title: String) {
+    HOME("home", R.drawable.icon_home, "Home"),
+    SHORTS("shorts", R.drawable.icon_shorts, "Shorts"),
+    LIVE("live", R.drawable.icon_live, "Live"),
+    SEARCH("search", R.drawable.icon_search, "Search"),
+    HISTORY("history", R.drawable.icon_history, "History")
+}
+
 @Composable
-fun BottomNavBar(navController: NavController) {
+fun BottomNavBar(navController: NavController, currentRoute: String?) {
     NavigationBar(
-        containerColor = Color.Black,
+        containerColor = AppColors.background,
         tonalElevation = 0.dp
     ) {
-        NavigationBarItem(
-            icon = {
-                Icon(
-                    painterResource(id = R.drawable.icon_home),
-                    contentDescription = "Home",
-                    modifier = Modifier
-                        .padding(horizontal = 6.dp)
-                        .size(18.dp)
+        MainTab.entries.forEach { tab ->
+            val selected = currentRoute == tab.route
+            NavigationBarItem(
+                icon = {
+                    Icon(
+                        painterResource(id = tab.icon),
+                        contentDescription = tab.title,
+                        modifier = Modifier
+                            .padding(horizontal = 6.dp)
+                            .size(18.dp)
+                    )
+                },
+                label = { Text(tab.title, fontSize = 10.sp) },
+                selected = selected,
+                onClick = { navController.navigate(tab.route) },
+                colors = NavigationBarItemDefaults.colors(
+                    selectedIconColor = AppColors.white,
+                    selectedTextColor = AppColors.white,
+                    unselectedIconColor = AppColors.gray4,
+                    unselectedTextColor = AppColors.gray4
                 )
-            },
-            label = { Text("Home",fontSize = 10.sp) },
-            selected = false,
-            onClick = { navController.navigate("home") },
-            colors = NavigationBarItemDefaults.colors(
-                selectedIconColor = Color.White,
-                selectedTextColor = Color.White,
-                unselectedIconColor = Color(0xFF808080),
-                unselectedTextColor = Color(0xFF808080)
             )
-        )
-        NavigationBarItem(
-            icon = {
-                Icon(
-                    painterResource(id = R.drawable.icon_shorts),
-                    contentDescription = "Short",
-                    modifier = Modifier
-                        .padding(horizontal = 6.dp)
-                        .size(18.dp)
-                )
-            },
-            label = { Text("Shorts",fontSize = 10.sp) },
-            selected = false,
-            onClick = { navController.navigate("shorts") },
-            colors = NavigationBarItemDefaults.colors(
-                selectedIconColor = Color.White,
-                selectedTextColor = Color.White,
-                unselectedIconColor = Color(0xFF808080),
-                unselectedTextColor = Color(0xFF808080)
-            )
-        )
-        NavigationBarItem(
-            icon = {
-                Icon(
-                    painterResource(id = R.drawable.icon_live),
-                    contentDescription = "Live",
-                    modifier = Modifier
-                        .padding(horizontal = 6.dp)
-                        .size(18.dp)
-                )
-            },
-            label = { Text("Live",fontSize = 10.sp) },
-            selected = false,
-            onClick = { navController.navigate("live") },
-            colors = NavigationBarItemDefaults.colors(
-                selectedIconColor = Color.White,
-                selectedTextColor = Color.White,
-                unselectedIconColor = Color(0xFF808080),
-                unselectedTextColor = Color(0xFF808080)
-            )
-        )
-        NavigationBarItem(
-            icon = {
-                Icon(
-                    painterResource(id = R.drawable.icon_search),
-                    contentDescription = "Search",
-                    modifier = Modifier
-                        .padding(horizontal = 6.dp)
-                        .size(18.dp)
-                )
-            },
-            label = { Text("Search",fontSize = 10.sp) },
-            selected = false,
-            onClick = { navController.navigate("search") },
-            colors = NavigationBarItemDefaults.colors(
-                selectedIconColor = Color.White,
-                selectedTextColor = Color.White,
-                unselectedIconColor = Color(0xFF808080),
-                unselectedTextColor = Color(0xFF808080)
-            )
-        )
-        NavigationBarItem(
-            icon = {
-                Icon(
-                    painterResource(id = R.drawable.icon_history),
-                    contentDescription = "History",
-                    modifier = Modifier
-                        .padding(horizontal = 6.dp)
-                        .size(18.dp)
-                )
-            },
-            label = { Text("History",fontSize = 10.sp) },
-            selected = false,
-            onClick = { navController.navigate("history") },
-            colors = NavigationBarItemDefaults.colors(
-                selectedIconColor = Color.White,
-                selectedTextColor = Color.White,
-                unselectedIconColor = Color(0xFF808080),
-                unselectedTextColor = Color(0xFF808080)
-            )
-        )
+        }
     }
 }
 
