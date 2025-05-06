@@ -28,7 +28,7 @@ fun MyScreen(navController: NavController, viewModel: MyViewModel) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(AppColors.background,)
+            .background(AppColors.background)
             .padding(top = 100.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceBetween
