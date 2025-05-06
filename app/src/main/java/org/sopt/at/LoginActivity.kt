@@ -32,6 +32,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import kotlinx.coroutines.launch
 import org.sopt.at.ui.theme.ATSOPTANDROIDTheme
 import org.sopt.at.ui.theme.AppColors
@@ -48,10 +49,8 @@ class LoginActivity : ComponentActivity() {
 
         val idState = mutableStateOf("")
         val pwState = mutableStateOf("")
-        val registeredId = mutableStateOf("")
-        val registeredPw = mutableStateOf("")
 
-        val signUpLauncher =
+        signUpLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 if (result.resultCode == RESULT_OK) {
                     val id = result.data?.getStringExtra("id") ?: ""
@@ -59,9 +58,6 @@ class LoginActivity : ComponentActivity() {
 
                     idState.value = id
                     pwState.value = pw
-                    registeredId.value = id
-                    registeredPw.value = pw
-
                 }
             }
 
@@ -74,15 +70,20 @@ class LoginActivity : ComponentActivity() {
                         onIdChange = { idState.value = it },
                         onPwChange = { pwState.value = it },
                         onLoginClick = {
-                            if (idState.value != registeredId.value || pwState.value != registeredPw.value) {
-                                Toast.makeText(this, "회원가입된 정보와 일치하지 않습니다.", Toast.LENGTH_SHORT).show()
-                            } else {
-                                myViewModel.setUserId(idState.value)
-                                val intent = Intent(this, MainActivity::class.java).apply {
-                                    putExtra("id", idState.value)
+                            myViewModel.signIn(
+                                loginId = idState.value,
+                                password = pwState.value,
+                                onSuccess = { userId ->
+                                    myViewModel.setUserId(userId.toString())
+                                    val intent = Intent(this, MainActivity::class.java).apply {
+                                        putExtra("id", idState.value)
+                                    }
+                                    startActivity(intent)
+                                },
+                                onFailure = { message ->
+                                    Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
                                 }
-                                startActivity(intent)
-                            }
+                            )
                         },
                         onSignUpClick = {
                             val intent = Intent(this, SignUpActivity1::class.java)
@@ -93,7 +94,6 @@ class LoginActivity : ComponentActivity() {
             }
         }
     }
-
 }
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -111,6 +111,7 @@ fun Login(
     var passwordVisible by remember { mutableStateOf(false) }
     val snackbarHostState = remember { SnackbarHostState() }
     val coroutineScope = rememberCoroutineScope()
+    val myViewModel: MyViewModel = viewModel()
 
     Scaffold(
         modifier = modifier.background(AppColors.secondary),
@@ -196,7 +197,23 @@ fun Login(
             }
 
             Button(
-                onClick = onLoginClick,
+                onClick = {
+                    myViewModel.signIn(
+                        loginId = id,
+                        password = pw,
+                        onSuccess = { userId ->
+                            myViewModel.setUserId(userId.toString())
+                            Toast.makeText(context, "로그인 성공! userId: $userId", Toast.LENGTH_SHORT).show()
+                            val intent = Intent(context, MainActivity::class.java).apply {
+                                putExtra("id", id)
+                            }
+                            context.startActivity(intent)
+                        },
+                        onFailure = { message ->
+                            Toast.makeText(context, "로그인 실패: $message", Toast.LENGTH_SHORT).show()
+                        }
+                    )
+                },
                 modifier = Modifier
                     .padding(10.dp)
                     .padding(top = 15.dp)
@@ -236,7 +253,6 @@ fun Login(
             )
         }
     }
-
 }
 
 @Preview(showBackground = true)
@@ -245,4 +261,3 @@ fun GreetingPreview2() {
     ATSOPTANDROIDTheme {
     }
 }
-

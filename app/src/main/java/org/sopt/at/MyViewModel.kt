@@ -6,6 +6,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import org.sopt.at.data.model.SignUpRequest
 import org.sopt.at.data.model.SignUpResponse
+import org.sopt.at.data.model.SignInRequest
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import org.sopt.at.remote.ServicePool
@@ -37,6 +38,26 @@ class MyViewModel : ViewModel() {
                 }
             } catch (e: Exception) {
                 onFailure("네트워크 오류: ${e.message}")
+            }
+        }
+    }
+
+    fun signIn(
+        loginId: String,
+        password: String,
+        onSuccess: (Long) -> Unit,
+        onFailure: (String) -> Unit
+    ) {
+        viewModelScope.launch {
+            try {
+                val response = ServicePool.authService.signIn(SignInRequest(loginId, password))
+                if (response.success && response.data != null) {
+                    onSuccess(response.data.userId)
+                } else {
+                    onFailure(response.message)
+                }
+            } catch (e: Exception) {
+                onFailure("네트워크 오류가 발생했어요: ${e.localizedMessage}")
             }
         }
     }
