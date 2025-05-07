@@ -74,9 +74,9 @@ class LoginActivity : ComponentActivity() {
                                 loginId = idState.value,
                                 password = pwState.value,
                                 onSuccess = { userId ->
-                                    myViewModel.setUserId(userId.toString())
+                                    myViewModel.setUserId(userId)
                                     val intent = Intent(this, MainActivity::class.java).apply {
-                                        putExtra("id", idState.value)
+                                        putExtra("userId", userId)
                                     }
                                     startActivity(intent)
                                 },
@@ -202,10 +202,10 @@ fun Login(
                         loginId = id,
                         password = pw,
                         onSuccess = { userId ->
-                            myViewModel.setUserId(userId.toString())
+                            myViewModel.setUserId(userId)
                             Toast.makeText(context, "로그인 성공! userId: $userId", Toast.LENGTH_SHORT).show()
                             val intent = Intent(context, MainActivity::class.java).apply {
-                                putExtra("id", id)
+                                putExtra("userId", userId)
                             }
                             context.startActivity(intent)
                         },
