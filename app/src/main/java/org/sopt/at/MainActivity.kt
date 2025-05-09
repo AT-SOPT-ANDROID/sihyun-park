@@ -1,6 +1,7 @@
 package org.sopt.at
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -27,8 +28,11 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         val myViewModel: MyViewModel by viewModels()
-        val idFromLogin = intent.getStringExtra("id") ?: "Unknown"
-        myViewModel.setUserId(idFromLogin)
+
+        val userIdFromLogin = intent.getLongExtra("userId", -1L)
+        if (userIdFromLogin != -1L) {
+            myViewModel.setUserId(userIdFromLogin)
+        }
 
         setContent {
             ATSOPTANDROIDTheme {
